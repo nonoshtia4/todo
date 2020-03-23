@@ -1,4 +1,9 @@
-# todo
-# test 
+# version 
+* ruby 2.5
+* Rails 5.1.7
 
-# 季節は次々死んでいく
+# Issue list
+* couldn't find file 'jquery' with type 'application/javascript'
+->Gemに追加 gem 'jquery-rails'
+
+
