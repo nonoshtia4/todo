@@ -1,29 +1,33 @@
-<p id="notice"><%= notice %></p>
+<h1 class="mb-4">タスク一覧</h1>
 
-<h1>Listing Tasks</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Content</th>
-      <th>Status</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @tasks.each do |task| %>
+<% if @tasks.empty? %>
+  <p class="text-muted">タスクがありません。新しいタスクを追加してください。</p>
+<% else %>
+  <table class="table table-hover">
+    <thead class="thead-dark">
       <tr>
-        <td><%= task.content %></td>
-        <td><%= task.status %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>内容</th>
+        <th>ステータス</th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Task', new_task_path %>
+    </thead>
+    <tbody>
+      <% @tasks.each do |task| %>
+        <tr>
+          <td><%= task.content %></td>
+          <td>
+            <% badge_class = { 'todo' => 'secondary', 'doing' => 'primary', 'done' => 'success' }[task.status] %>
+            <span class="badge badge-<%= badge_class %>">
+              <%= { 'todo' => '未着手', 'doing' => '進行中', 'done' => '完了' }[task.status] %>
+            </span>
+          </td>
+          <td class="text-right">
+            <%= link_to '詳細', task, class: 'btn btn-sm btn-outline-secondary mr-1' %>
+            <%= link_to '編集', edit_task_path(task), class: 'btn btn-sm btn-outline-primary mr-1' %>
+            <%= link_to '削除', task, method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-sm btn-outline-danger' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

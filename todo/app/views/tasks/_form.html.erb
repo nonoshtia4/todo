@@ -1,25 +1,28 @@
 <%= form_for(@task) do |f| %>
   <% if @task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
-
-      <ul>
-      <% @task.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+    <div class="alert alert-danger">
+      <ul class="mb-0">
+        <% @task.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :content %><br>
-    <%= f.text_area :content %>
+  <div class="form-group">
+    <%= f.label :content, '内容' %>
+    <%= f.text_area :content, class: 'form-control', rows: 3, placeholder: 'タスクの内容を入力' %>
   </div>
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.select :status, Task.statuses.keys.to_a %>
+
+  <div class="form-group">
+    <%= f.label :status, 'ステータス' %>
+    <%= f.select :status,
+      [['未着手', 'todo'], ['進行中', 'doing'], ['完了', 'done']],
+      {},
+      class: 'form-control' %>
   </div>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit '保存', class: 'btn btn-primary' %>
   </div>
 <% end %>
