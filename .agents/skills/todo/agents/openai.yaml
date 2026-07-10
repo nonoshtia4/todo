@@ -1,0 +1,6 @@
+interface:
+  display_name: "Todo"
+  short_description: "Repo-specific patterns and workflows for todo"
+  default_prompt: "Use the todo repo skill to follow existing architecture, testing, and workflow conventions."
+policy:
+  allow_implicit_invocation: true
